@@ -10,7 +10,7 @@ export class Blog {
 
     @ApiProperty({ type: Date })
     @Prop()
-    Date: Date;
+    BlogDate: Date;
 
     @ApiProperty({ type: String })
     @Prop()
