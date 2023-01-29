@@ -9,6 +9,7 @@ export class BlogsService {
   }
 
   async create(createBlogDto: Blog) {
+    createBlogDto.BlogDate = new Date();
     return await this.dataModel.create(createBlogDto);
   }
 
@@ -21,6 +22,7 @@ export class BlogsService {
   }
 
   async update(id: string, updateBlogDto: Blog) {
+    updateBlogDto.BlogDate = new Date();
     return await this.dataModel.findByIdAndUpdate({ _id: id }, updateBlogDto).exec();
   }
 
