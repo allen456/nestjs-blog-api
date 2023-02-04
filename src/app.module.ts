@@ -4,12 +4,15 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { BlogsModule } from './blogs/blogs.module';
+import { KafkaModule } from './kafka/kafka.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ envFilePath: `process.env` }),
     MongooseModule.forRoot(process.env.MONGODB_URI),
-    BlogsModule],
+    BlogsModule,
+    KafkaModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
