@@ -8,25 +8,25 @@ export class BlogsService {
   constructor(@InjectModel(Blog.name) private readonly dataModel: Model<BlogDocument>) {
   }
 
-  async create(createBlogDto: Blog) {
+  create(createBlogDto: Blog) {
     createBlogDto.BlogDate = new Date();
-    return await this.dataModel.create(createBlogDto);
+    return this.dataModel.create(createBlogDto);
   }
 
-  async findAll() {
-    return await this.dataModel.find().exec();
+  findAll() {
+    return this.dataModel.find().exec();
   }
 
-  async findOne(id: string) {
-    return await this.dataModel.findOne({ _id: id }).exec();
+  findOne(id: string) {
+    return this.dataModel.findOne({ _id: id }).exec();
   }
 
-  async update(id: string, updateBlogDto: Blog) {
+  update(id: string, updateBlogDto: Blog) {
     updateBlogDto.BlogDate = new Date();
-    return await this.dataModel.findByIdAndUpdate({ _id: id }, updateBlogDto).exec();
+    return this.dataModel.findByIdAndUpdate({ _id: id }, updateBlogDto).exec();
   }
 
-  async remove(id: string) {
-    return await this.dataModel.findByIdAndRemove({ _id: id }).exec();
+  remove(id: string) {
+    return this.dataModel.findByIdAndRemove({ _id: id }).exec();
   }
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus } from '@nestjs/common';
 import { BlogsService } from './blogs.service';
 import { Blog } from './schema/blog.schema';
 
@@ -7,27 +7,39 @@ export class BlogsController {
   constructor(private readonly blogsService: BlogsService) { }
 
   @Post()
-  create(@Body() createBlogDto: Blog) {
+  async create(@Body() createBlogDto: Blog) {
     return this.blogsService.create(createBlogDto);
   }
 
   @Get()
-  findAll() {
-    return this.blogsService.findAll();
+  async findAll() {
+    const returnData = await this.blogsService.findAll();
+    if(!returnData){
+      throw new HttpException('No data found', HttpStatus.NOT_FOUND);
+    }
+    return returnData;
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.blogsService.findOne(id);
+  async findOne(@Param('id') id: string) {
+    const returnData = await this.blogsService.findOne(id);
+    if(!returnData){
+      throw new HttpException(id + 'No data found', HttpStatus.NOT_FOUND);
+    }
+    return returnData;
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBlogDto: Blog) {
-    return this.blogsService.update(id, updateBlogDto);
+  async update(@Param('id') id: string, @Body() updateBlogDto: Blog) {
+    const returnData = await this.blogsService.update(id, updateBlogDto);
+    if(!returnData){
+      throw new HttpException('No data found', HttpStatus.NOT_FOUND);
+    }
+    return returnData;
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.blogsService.remove(id);
   }
 }
