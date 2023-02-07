@@ -16,7 +16,7 @@ export class Blog {
     Title: string;
     
     @Prop()
-    Subtitle: boolean;
+    Subtitle: string;
 
     @Prop()
     BlogDate: Date;
