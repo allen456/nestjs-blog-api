@@ -4,12 +4,25 @@ export type BlogDocument = Blog & Document;
 @Schema()
 export class Blog {
     @Prop()
+    Category: string;
+    
+    @Prop()
+    Feature: boolean;
+    
+    @Prop()
+    Image: string;
+
+    @Prop()
     Title: string;
+    
+    @Prop()
+    Subtitle: boolean;
 
     @Prop()
     BlogDate: Date;
 
     @Prop()
     Content: string;
+
 }
 export const BlogSchema = SchemaFactory.createForClass(Blog);
