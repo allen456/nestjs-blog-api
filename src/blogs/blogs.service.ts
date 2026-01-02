@@ -39,7 +39,7 @@ export class BlogsService {
     //     value: Buffer.from(JSON.stringify({status: 'update', data: updateBlogDto}))
     //   }]
     // });
-    return this.dataModel.findByIdAndUpdate({ _id: id }, updateBlogDto).exec();
+    return this.dataModel.findByIdAndUpdate(id, updateBlogDto).exec();
   }
 
   remove(id: string) {
@@ -49,6 +49,6 @@ export class BlogsService {
     //     value: Buffer.from(JSON.stringify({status: 'delete', data: id}))
     //   }]
     // });
-    return this.dataModel.findByIdAndRemove({ _id: id }).exec();
+    return this.dataModel.findByIdAndDelete(id).exec();
   }
 }
